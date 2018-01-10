@@ -1,0 +1,9 @@
+target/
+.idea/
+src/main/frontend/node/
+src/main/frontend/node_modules/
+jetty_base/data/*
+jetty_base/webapps/*
+!jetty_base/webapps/ROOT/
+jetty_base/webapps/ROOT/*
+*.iml

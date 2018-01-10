@@ -1,0 +1,71 @@
+.entrance {
+    background-color: #DDD;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: auto;
+
+}
+
+.vertical-aligner {
+    min-height: 60vh;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.editing-grid {
+    display: grid;
+    grid: auto / auto auto;
+}
+
+.control-button {
+    background: #aaa;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+}
+
+.control-button:after {
+    clear: both;
+    display: table;
+    content: "";
+}
+
+.create-button {
+    background: #0c0;
+}
+
+.create-button:focus {
+    background: #0f0;
+}
+
+.edit-button {
+    background: #cc0;
+}
+
+.edit-button:focus {
+    background: #ff0
+}
+
+.open-button {
+    background: #ccc;
+}
+
+.open-button:focus {
+    background: #fff
+}
+
+.delete-button {
+    background: #c00;
+}
+
+.delete-button:focus {
+    background: #f00
+}
