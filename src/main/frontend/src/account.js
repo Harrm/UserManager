@@ -12,7 +12,7 @@ export function createDefault() {
 // throws an Error instance if the account is invalid
 export function validate(account) {
     if(typeof(account.birthday) != "string" || isNaN(Date.parse(account.birthday))) {
-        throw new Error("Invalid birthday:"+account.birthday"; Should be in format YYYY-MM-DD");
+        throw new Error("Invalid birthday:"+account.birthday+"; Should be in format YYYY-MM-DD");
     }
     account.birthday = new Date(account.birthday).toISOString().substring(0, 10)
 
@@ -21,7 +21,10 @@ export function validate(account) {
     if(typeof (account.password) != "string")
         throw new Error("Invalid password")
     if(typeof (account.login) != "string" || /[^a-zA-Z0-9_]/.test(account.login))
-        throw new Error("Invalid login: "+account.login+"; Should contain only letters, digits, and underscores.")
+        throw new Error("Invalid login: "+account.login+"; Should contain only letters, digits, and underscores")
+    if(account.login.length == 0) {
+        throw new Error("Invalid login; Should not be empty")
+    }
     if(!("Male" === account.sex || "Female" === account.sex)) {
         throw new Error("Invalid sex: "+account.sex+"; Acceptable values are Male and Female")
     }
