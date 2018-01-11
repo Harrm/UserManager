@@ -117,6 +117,13 @@
                             <arguments>run build </arguments>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>gulp build</id>
+                        <goals>
+                            <goal>gulp</goal>
+                        </goals>
+                        <phase>install</phase>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>

@@ -6,11 +6,13 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17",
-    "axios":"0.17.1"
+    "axios":"0.17.1",
+    "gulp": "^3.9.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf ../../../jetty_base/webapps/ROOT && mv build ../../../jetty_base/webapps/ROOT",
+    "prebuild": "react-scripts build",
+    "build": "gulp",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

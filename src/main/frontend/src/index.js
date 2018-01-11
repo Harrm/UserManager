@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import * as account_utils from './account.js'
 import './user_manager.css'
 
-const apiAddress = '/user-manager-1.0-SNAPSHOT/api/accounts/'
+const apiAddress = '/api/accounts/'
 
 // a React component with the following properties:
 // className: additional CSS classes

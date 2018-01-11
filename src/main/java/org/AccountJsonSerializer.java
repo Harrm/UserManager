@@ -109,7 +109,7 @@ public class AccountJsonSerializer {
      */
     public static void validateJsonAsPartialAccount(JsonNode root) {
         if(root.has("login")) {
-            if(!"a".matches("[a-zA-Z0-9_]+")) {
+            if(!root.get("login").asText().matches("[a-zA-Z0-9_]+")) {
                 throw new InvalidDescription("Invalid login: should consist only of letters and '_'");
             }
         }

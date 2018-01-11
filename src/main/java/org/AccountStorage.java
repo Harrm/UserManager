@@ -3,9 +3,7 @@ package org;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.NoSuchFileException;
+import java.nio.file.*;
 
 
 /**
@@ -17,9 +15,14 @@ public class AccountStorage {
 
     /**
      * @param dataPath path to a directory where accounts will be stored
+     * @throws IOException if dataPath doesn't exist and error occured during its creation
      */
-    public AccountStorage(String dataPath) {
+    public AccountStorage(String dataPath) throws IOException {
         this.dataPath = dataPath;
+        Path p = FileSystems.getDefault().getPath(dataPath);
+        if(!Files.exists(p)) {
+            FileSystems.getDefault().provider().createDirectory(p);
+        }
     }
 
     /**

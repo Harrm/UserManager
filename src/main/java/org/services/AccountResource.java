@@ -25,7 +25,7 @@ public class AccountResource {
     /**
      * Initializes the storage at the data directory of the server base
      */
-    public AccountResource() {
+    public AccountResource() throws IOException {
         accounts = new AccountStorage("./data/");
     }
 
