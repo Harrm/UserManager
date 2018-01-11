@@ -58,6 +58,14 @@ public class Account  {
         return sex;
     }
 
+    public boolean equals(Account a) {
+        return name.equals(a.name) &&
+                login.equals(a.login) &&
+                password.equals(a.password) &&
+                birthday.equals(a.birthday) &&
+                sex == a.sex;
+    }
+
     String name;
     String login;
     String password;

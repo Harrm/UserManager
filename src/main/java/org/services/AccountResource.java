@@ -1,7 +1,6 @@
 package org.services;
 
-import com.sun.jersey.api.NotFoundException;
-import com.sun.jersey.spi.resource.Singleton;
+import javax.inject.Singleton;
 import org.Account;
 import org.AccountJsonSerializer;
 import org.AccountStorage;
@@ -24,8 +23,10 @@ public class AccountResource {
 
     /**
      * Initializes the storage at the data directory of the server base
+     *
+     * @throws IOException from storage creation
      */
-    public AccountResource() throws IOException {
+    public AccountResource() throws IOException{
         accounts = new AccountStorage("./data/");
     }
 
@@ -47,8 +48,8 @@ public class AccountResource {
             System.err.println(e);
             return Response.serverError().build();
 
-        } catch (AccountJsonSerializer.InvalidDescription e) {
-            return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
+        } catch (AccountJsonSerializer.InvalidDescription|IllegalArgumentException e) {
+            return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).entity(e.getMessage()).build();
         }
     }
 
@@ -75,7 +76,7 @@ public class AccountResource {
             throw new NotFoundException("User "+login+" does not exist");
 
         } catch (IOException e) {
-            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(e.getMessage(), Response.Status.INTERNAL_SERVER_ERROR);
 
         }
     }
@@ -105,9 +106,9 @@ public class AccountResource {
         } catch (AccountStorage.UserNotFoundException e) {
             throw new NotFoundException("User "+login+" does not exist");
         } catch (IOException e) {
-            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(e.getMessage(), Response.Status.INTERNAL_SERVER_ERROR);
         } catch (AccountJsonSerializer.InvalidDescription e) {
-            throw new WebApplicationException(e, Response.Status.UNSUPPORTED_MEDIA_TYPE);
+            throw new WebApplicationException(e.getMessage(), Response.Status.UNSUPPORTED_MEDIA_TYPE);
         }
     }
 
@@ -125,7 +126,7 @@ public class AccountResource {
         } catch (AccountStorage.UserNotFoundException e) {
             throw new NotFoundException("User "+login+" does not exist");
         } catch (IOException e) {
-            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(e.getMessage(), Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
 
