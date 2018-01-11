@@ -1,0 +1,142 @@
+swagger: '2.0'
+info:
+  description: This is a microservice designed to manage user accounts.
+  version: 1.0.0
+  title: User Manager
+  contact:
+    email: v.shcherba@innopolis.ru
+basePath: /api
+tags:
+  - name: accounts
+    description: Operations about user accounts
+schemes:
+  - http
+paths:
+  /accounts:
+    post:
+      tags:
+        - accounts
+      summary: Create a new user account
+      description: Consumes a description of a user to be created in JSON format.
+      operationId: createAccount
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: User account object that needs to be created
+          required: true
+          schema:
+            $ref: '#/definitions/Account'
+      responses:
+        '201':
+          description: Successful operation
+        '405':
+          description: Given account object is invalid
+  '/accounts/{login}':
+    get:
+      tags:
+        - accounts
+      summary: Get account by login
+      description: ''
+      operationId: getAccount
+      produces:
+        - application/json
+      parameters:
+        - name: login
+          in: path
+          description: The id that needs to be fetched.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Account'
+        '404':
+          description: Account not found
+    put:
+      tags:
+        - accounts
+      summary: Update account
+      description: ''
+      operationId: updateUser
+      consumes:
+        - application/json
+      parameters:
+        - name: login
+          in: path
+          description: the login that needs to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: a partial account description with fields to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Account'
+      responses:
+        '204':
+          description: Successful update
+        '404':
+          description: Account not found
+        '415':
+          description: Invalid account description supplied
+    delete:
+      tags:
+        - accounts
+      summary: Delete account
+      description: ''
+      operationId: deleteAccount
+      produces:
+        - application/json
+      parameters:
+        - name: login
+          in: path
+          description: The login of an account that needs to be deleted
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Successful deletion
+        '404':
+          description: Account not found
+        '500':
+          description: Internal server error
+definitions:
+  Account:
+    type: object
+    required:
+      - name
+      - birthday
+      - sex
+      - login
+      - password
+    properties:
+      login:
+        type: string
+      birthday:
+        type: string
+        format: date YYYY-MM-DD
+        example: 1991-10-1
+      name:
+        type: string
+      password:
+        type: string
+      sex:
+        type: string
+        enum:
+          - Male
+          - Female
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
