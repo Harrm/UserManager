@@ -4,5 +4,6 @@ Servlet-based web-application which purpose is to manage user accounts. The appl
 
 In order to build the application run 'mvn clean install' in the root folder. First build may take a while, for it will install local NodeJS and NPM and all the needed dependencies.
 
+To run the application start a jetty server in 'jetty_base' folder after building.
 The web-application is running on a port 8080.
 RESTful API lies at /api/accounts URL. It supports CRUD requests. For further information read the description in Swagger format at the root folder.
